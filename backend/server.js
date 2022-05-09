@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const path  = require("path");
 const { v4: uuidv4 } = require('uuid');
+const Upgrade = require("./upgrade")
 const app = express();
 
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser : true}, function(err){
@@ -22,6 +23,8 @@ mongoose.connect(process.env.MONGO_URL, {useNewUrlParser : true}, function(err){
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
+app.use(cors());
+app.use("/upgrade" , Upgrade)
 
 
 
